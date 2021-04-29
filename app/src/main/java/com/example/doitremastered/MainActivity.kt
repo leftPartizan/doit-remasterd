@@ -1,5 +1,6 @@
 package com.example.doitremastered
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.example.doit.data.db.entities.CustomLists
+import com.example.doitremastered.app.App
 import com.example.doitremastered.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,19 +24,12 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: MainViewModel
 
-    @Inject
-    lateinit var listsDao: CustomListsDao
-
-    lateinit var appComponent: AppComponent
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        appComponent.injectActivity(this)
-        CoroutineScope(Dispatchers.Default).launch {listsDao.insertList(CustomLists("a"))}
-        CoroutineScope(Dispatchers.Default).launch { Log.d("w","a")}
+        App.appComponent.injectActivity(this)
         viewModel.printLog()
 
         binding = ActivityMainBinding.inflate(layoutInflater)

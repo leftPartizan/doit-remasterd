@@ -7,6 +7,6 @@ import dagger.Module
 @Module
 interface ActivityModule {
 
-    @Binds
-    fun bindActivity() : MainActivity
+//    @Binds
+//    fun bindActivity() : MainActivity
 }

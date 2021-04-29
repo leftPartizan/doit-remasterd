@@ -10,9 +10,8 @@ import javax.inject.Singleton
 @Component(modules = [ViewModelModule::class, DataBaseModule::class])
 interface AppComponent {
 
-    fun injectActivity(mainActivity: Activity)
-//    override fun inject(instance: App)
-//
+    fun injectActivity(mainActivity: MainActivity)
+
     @Component.Factory
     interface Factory {
         fun create(@BindsInstance application : Application) : AppComponent

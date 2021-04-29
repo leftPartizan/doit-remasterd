@@ -15,6 +15,10 @@ class ViewModelModule {
     @Provides
     @Singleton
     fun provideVM(mainActivity: MainActivity) : MainViewModel =
-          ViewModelProvider(mainActivity).get(MainViewModel::class.java)
+        ViewModelProvider(mainActivity).get(MainViewModel::class.java)
+
+//    @Provides
+//    @Singleton
+//    fun provideVM() : MainViewModel =  MainViewModel()
 
 }
