@@ -1,24 +1,17 @@
 package com.example.doitremastered
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.doitremastered.app.App
+import com.example.doitremastered.di.viewmodeiInjector.ViewModelKey
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import dagger.multibindings.IntoMap
 
 @Module
-class ViewModelModule {
+interface ViewModelModule {
 
-    @Provides
-    @Singleton
-    fun provideVM(mainActivity: MainActivity) : MainViewModel =
-        ViewModelProvider(mainActivity).get(MainViewModel::class.java)
-
-//    @Provides
-//    @Singleton
-//    fun provideVM() : MainViewModel =  MainViewModel()
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    fun bindUserViewModel(mainViewModel: MainViewModel): ViewModel
 
 }

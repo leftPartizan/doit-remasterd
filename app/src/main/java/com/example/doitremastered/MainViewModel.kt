@@ -2,9 +2,17 @@ package com.example.doitremastered
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.doitremastered.data.repositories.Repository
 import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repository: Repository
+) : ViewModel() {
 
-    public fun printLog() = Log.d("www", "hello from viewmodel")
+    init {
+    }
+
+    fun printLog() = Log.d("www", "hello from viwmodel")
+
+    suspend fun getAllListTasks() = repository.getAllList()
 }

@@ -1,35 +1,43 @@
 package com.example.doitremastered
 
-import android.app.Application
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.example.doit.data.db.entities.CustomLists
 import com.example.doitremastered.app.App
 import com.example.doitremastered.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    val viewModel: MainViewModel by viewModels {
+        viewModelFactory
+    }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.appComponent.activitySubComponent().create(this).inject(this)
         super.onCreate(savedInstanceState)
-        App.appComponent.injectActivity(this)
+        GlobalScope.launch(Dispatchers.IO) { Log.d("www", "${viewModel.getAllListTasks()}") }
+
         viewModel.printLog()
 
         binding = ActivityMainBinding.inflate(layoutInflater)

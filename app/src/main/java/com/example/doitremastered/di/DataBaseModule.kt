@@ -1,6 +1,5 @@
 package com.example.doitremastered
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
@@ -9,16 +8,16 @@ import javax.inject.Singleton
 @Module
 class DataBaseModule {
 
+
     @Provides
     @Singleton
-    fun provideDoItDao(application : Application) : DoItDao {
-        return DoItDataBase.getInstance(application).getDoItDao()
+    fun provideDoItDao(context: Context): DoItDao {
+        return DoItDataBase.getInstance(context).getDoItDao()
     }
-//
-//    @Provides
-//    @Singleton
-//    fun provideCustomListsDao(context : Context) : CustomListsDao {
-//        return DoItDataBase.getInstance(context).getCustomListDao()
-//    }
+
+    @Provides
+    fun provideCustomListsDao(context: Context): CustomListsDao {
+        return DoItDataBase.getInstance(context).getCustomListDao()
+    }
 
 }

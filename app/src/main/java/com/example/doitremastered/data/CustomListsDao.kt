@@ -1,13 +1,12 @@
 package com.example.doitremastered
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.doit.data.db.entities.CustomLists
 
 @Dao
 interface CustomListsDao {
     @Query("SELECT * FROM custom_lists")
-    fun getAllLists(): LiveData<List<CustomLists>>
+    suspend fun getAllLists(): List<CustomLists>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertList(list: CustomLists)

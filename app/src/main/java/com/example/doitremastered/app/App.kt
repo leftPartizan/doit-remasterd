@@ -2,7 +2,6 @@ package com.example.doitremastered.app
 
 import android.app.Application
 import com.example.doitremastered.AppComponent
-import com.example.doitremastered.DaggerAppComponent
 
 class App : Application() {
 
@@ -16,9 +15,8 @@ class App : Application() {
     }
 
     fun initDagger() {
-
-        appComponent = DaggerAppComponent.factory().create(this)
+        appComponent = AppComponent.create(this)
     }
 
-//    override fun androidInjector(): AndroidInjector<Any> = androidInjector
+
 }

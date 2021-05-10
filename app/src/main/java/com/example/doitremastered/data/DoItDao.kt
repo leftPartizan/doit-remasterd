@@ -3,7 +3,6 @@ package com.example.doitremastered
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.doit.data.db.entities.Item
-import java.util.*
 
 @Dao
 interface DoItDao {
@@ -29,6 +28,7 @@ interface DoItDao {
 
     @Update
     suspend fun update(item: Item)
+
     @Query("SELECT * FROM items where notification_time not null")
     fun getAllItemsPlanned(): LiveData<List<Item>>
 
