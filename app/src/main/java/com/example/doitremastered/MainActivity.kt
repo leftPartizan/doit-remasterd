@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.doit.data.db.entities.CustomLists
 import com.example.doitremastered.app.App
 import com.example.doitremastered.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar

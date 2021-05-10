@@ -1,7 +1,7 @@
 package com.example.doitremastered.di
 
-import com.example.doitremastered.data.repositories.Repository
-import com.example.doitremastered.data.repositories.RepositoryImpl
+import com.example.doitremastered.data.repositories.tasks.TasksRepository
+import com.example.doitremastered.data.repositories.tasks.TasksRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -11,5 +11,5 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindRepo(repository: RepositoryImpl): Repository
+    fun bindRepo(repository: TasksRepositoryImpl): TasksRepository
 }

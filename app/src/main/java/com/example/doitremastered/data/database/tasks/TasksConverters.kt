@@ -1,9 +1,9 @@
-package com.example.doitremastered
+package com.example.doitremastered.data.database.tasks
 
 import androidx.room.TypeConverter
 import java.util.*
 
-object Converters {
+object TasksConverters {
     @TypeConverter
     @JvmStatic
     fun fromTimestamp(value: Long?): Calendar? = value?.let {

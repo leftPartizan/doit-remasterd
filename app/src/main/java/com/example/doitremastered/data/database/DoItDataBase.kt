@@ -1,21 +1,24 @@
-package com.example.doitremastered
+package com.example.doitremastered.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.doit.data.db.entities.CustomLists
-import com.example.doit.data.db.entities.Item
+import com.example.doitremastered.data.database.categories.dao.CategoriesDao
+import com.example.doitremastered.data.database.categories.entities.CategoryEntity
+import com.example.doitremastered.data.database.tasks.TaskEntity
+import com.example.doitremastered.data.database.tasks.TasksConverters
+import com.example.doitremastered.data.database.tasks.TasksDao
 
-@TypeConverters(Converters::class)
+@TypeConverters(TasksConverters::class)
 @Database(
-    entities = [Item::class, CustomLists::class],
+    entities = [TaskEntity::class, CategoryEntity::class],
     version = 8, exportSchema = false
 )
 abstract class DoItDataBase : RoomDatabase() {
-    abstract fun getDoItDao(): DoItDao
-    abstract fun getCustomListDao(): CustomListsDao
+    abstract fun getTasksDao(): TasksDao
+    abstract fun getCategoriesDao(): CategoriesDao
 
     companion object {
         @Volatile
