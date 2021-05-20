@@ -17,6 +17,4 @@ class App : Application() {
     fun initDagger() {
         appComponent = AppComponent.create(this)
     }
-
-
 }
