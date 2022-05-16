@@ -1,4 +1,4 @@
-package com.example.doitremastered
+package com.example.doitremastered.di
 
 import android.content.Context
 import com.example.doitremastered.data.database.DoItDataBase
@@ -9,7 +9,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DataBaseModule {
+object DataBaseModule {
 
     @Provides
     @Singleton
@@ -18,6 +18,7 @@ class DataBaseModule {
     }
 
     @Provides
+    @Singleton
     fun provideCategoryDao(context: Context): CategoriesDao {
         return DoItDataBase.getInstance(context).getCategoriesDao()
     }

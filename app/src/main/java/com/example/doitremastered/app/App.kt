@@ -1,7 +1,7 @@
 package com.example.doitremastered.app
 
 import android.app.Application
-import com.example.doitremastered.AppComponent
+import com.example.doitremastered.di.AppComponent
 
 class App : Application() {
 

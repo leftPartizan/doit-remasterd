@@ -18,4 +18,7 @@ interface CategoriesDao {
 
     @Delete
     fun delete(category: CategoryEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertMainCategories(categories: List<CategoryEntity>)
 }

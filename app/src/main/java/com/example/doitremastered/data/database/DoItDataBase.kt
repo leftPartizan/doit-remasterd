@@ -5,16 +5,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.doitremastered.data.database.categories.dao.CategoriesDao
 import com.example.doitremastered.data.database.categories.entities.CategoryEntity
 import com.example.doitremastered.data.database.tasks.TaskEntity
 import com.example.doitremastered.data.database.tasks.TasksConverters
 import com.example.doitremastered.data.database.tasks.TasksDao
+import java.util.concurrent.Executors
 
 @TypeConverters(TasksConverters::class)
 @Database(
     entities = [TaskEntity::class, CategoryEntity::class],
-    version = 8, exportSchema = false
+    version = 1, exportSchema = false
 )
 abstract class DoItDataBase : RoomDatabase() {
     abstract fun getTasksDao(): TasksDao
@@ -33,6 +35,22 @@ abstract class DoItDataBase : RoomDatabase() {
                 context.applicationContext,
                 DoItDataBase::class.java,
                 "DoItDB.db",
-            ).build()
+            )
+                .addCallback(object : RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        Executors.newSingleThreadExecutor().execute {
+                            instance?.getCategoriesDao()?.insertMainCategories(
+                                arrayListOf(
+                                    CategoryEntity(0, "сегодня", true),
+                                    CategoryEntity(1, "завтра", true),
+                                    CategoryEntity(2, "избранное", true),
+                                    CategoryEntity(3, "все задачи", true),
+                                )
+                            )
+                        }
+                    }
+                })
+                .build()
     }
 }
